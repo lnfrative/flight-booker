@@ -2,6 +2,7 @@
 
 import { hash, verify } from 'argon2'
 import { prisma } from '@/db';
+import { createAccessToken, setAccessTokenCookie } from '@/auth';
 
 export async function createUser(formData: FormData) {
   const email = formData.get('email')?.toString()
@@ -23,18 +24,19 @@ export async function createUser(formData: FormData) {
         password: hashedPassword,
       },
     })
+
+    const access_token = await createAccessToken(user)
+    await setAccessTokenCookie(access_token)
+
+    return {
+      message: 'Usuario creado',
+      success: true,
+    }
   } catch (error) {
     return {
       message: 'El email ya está en uso',
       success: false,
     }
-  }
-
-  // TODO: Generate a JWT token
-
-  return {
-    message: 'Usuario creado',
-    success: true,
   }
 }
 
@@ -65,13 +67,15 @@ export async function loginUser(formData: FormData) {
   const isPasswordValid = await verify(user.password, password)
 
   if (!isPasswordValid) {
+
     return {
       message: 'Contraseña incorrecta',
       success: false,
     }
   }
 
-  // TODO: Generate a JWT token
+  const access_token = await createAccessToken(user)
+  await setAccessTokenCookie(access_token)
 
   return {
     message: 'Usuario logueado',
