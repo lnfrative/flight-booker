@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(cuid())
+  name      String?
+  email     String  @unique
+  createdAt DateTime @default(now()) @map("created_at")
+
+  reservations Reservation[]
+
+  @@map("users")
+}
+
+model ReservationStatus {
+  id        Int     @id @default(autoincrement())
+  name      String
+  
+  reservations Reservation[]
+  @@unique([name])
+
+  @@map("reservation_status")
+}
+
+model Reservation {
+  id        String   @id @default(cuid())
+  userId    String  @map("user_id")
+  seatCount Int     @map("seat_count")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  status ReservationStatus @relation(fields: [statusId], references: [id])
+  statusId Int @map("status_id")
+
+  flightId String @map("flight_id")
+  flight Flight @relation(fields: [flightId], references: [id])
+
+  @@map("reservations")
+}
+
+
+
+model Flight {
+  id        String   @id @default(cuid())
+
+  availableCapacity Int @map("available_capacity")
+  departure DateTime @map("departure")
+
+  originId Int @map("origin_id")
+  origin   Airport @relation("Origin", fields: [originId], references: [id])
+
+  destinationId Int @map("destination_id")
+  destination Airport @relation("Destination", fields: [destinationId], references: [id])
+  
+  airplaneId Int @map("airplane_id")
+  airplane   Airplane @relation(fields: [airplaneId], references: [id])
+
+  reservations Reservation[]
+
+  @@map("flights")
+}
+
+model Airport {
+  id        Int     @id @default(autoincrement())
+  name      String
+  iataCode String @map("iata_code") @unique
+  icaoCode String @map("icao_code") 
+
+  flightsOrigin Flight[] @relation("Origin")
+  flightsDestination Flight[] @relation("Destination")
+
+  @@map("airports")
+}
+
+model Airplane {
+  id        Int     @id @default(autoincrement())
+  model     String @unique
+  capacity Int
+  stock Int
+  flights   Flight[]
+  @@map("airplanes")
+}
