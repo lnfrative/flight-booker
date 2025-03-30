@@ -11,7 +11,7 @@ interface DecodedAccessToken extends JwtPayload {
 
 export async function createAccessToken(user: User) {
   const token = jwt.sign({ email: user.email, name: user.name }, JWT_SECRET_KEY, {
-    expiresIn: '10m',
+    expiresIn: '1h',
     subject: user.id,
   });
   return token;
