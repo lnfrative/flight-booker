@@ -3,6 +3,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { cookies } from 'next/headers';
 
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY as string;
+const JWT_EXPIRATION_TIME = parseInt(process.env.JWT_EXPIRATION_TIME as string, 10);
 
 interface DecodedAccessToken extends JwtPayload {
   email: string;
@@ -11,7 +12,7 @@ interface DecodedAccessToken extends JwtPayload {
 
 export async function createAccessToken(user: User) {
   const token = jwt.sign({ email: user.email, name: user.name }, JWT_SECRET_KEY, {
-    expiresIn: '1h',
+    expiresIn: JWT_EXPIRATION_TIME,
     subject: user.id,
   });
   return token;
@@ -33,7 +34,8 @@ export async function setAccessTokenCookie(token: string): Promise<void> {
     httpOnly: true,
     sameSite: "strict",
     secure: process.env.NODE_ENV === "production",
-    path: "/"
+    path: "/",
+    maxAge: JWT_EXPIRATION_TIME
   });
 
 }

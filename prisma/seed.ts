@@ -1,11 +1,15 @@
 import { faker } from '@faker-js/faker';
 import { prisma } from '../db';
 import { hash } from 'argon2';
+import { createAccessToken } from '../auth';
 
 const AIRPLANE_SIZE = 10;
 const AIRPORT_SIZE = 10;
 
 async function main() {
+  console.log('\nSeeding database...');
+
+  console.log('\nCreating reservation statuses...');
   const reservationStatuses = await Promise.all([
     prisma.reservationStatus.create({
       data: { name: 'RESERVADO' },
@@ -18,6 +22,7 @@ async function main() {
     }),
   ]);
 
+  console.log('\nCreating airplane models...');
   const airplaneModels = generateUniqueAirplaneModels();
   const airplanes = await Promise.all(
     Array.from({ length: AIRPLANE_SIZE }).map((value, idx) =>
@@ -31,6 +36,7 @@ async function main() {
     )
   );
 
+  console.log('\nCreating airports...');
   const airportsData = generateUniqueAirports();
   const airports = await Promise.all(
     Array.from({ length: AIRPORT_SIZE }).map((value, idx) => {
@@ -44,6 +50,7 @@ async function main() {
     })
   );
 
+  console.log('\nCreating flights...');
   const flights = await Promise.all(
     Array.from({ length: 5 }).map(() => {
       const airplane = faker.helpers.arrayElement(airplanes);
@@ -63,28 +70,38 @@ async function main() {
     )
   );
 
-  const user = await prisma.user.create({
-    data: {
-      name: 'johndoe',
-      email: 'johndoe@example.com',
-      password: await hash('randompassword'),
-    },
-  });
+  if (process.env.NODE_ENV === 'development') {
+    console.log('\nDevelopment environment detected, creating a test user...');
 
-  const reservations = await Promise.all(
-    Array.from({ length: 5 }).map(() =>
-      prisma.reservation.create({
-        data: {
-          userId: user.id,
-          seatCount: faker.number.int({ min: 1, max: 4 }),
-          statusId: faker.helpers.arrayElement(reservationStatuses).id,
-          flightId: faker.helpers.arrayElement(flights).id,
-        },
-      })
-    )
-  );
+    const user = await prisma.user.create({
+      data: {
+        name: 'johndoe',
+        email: 'johndoe@example.com',
+        password: await hash('randompassword'),
+      },
+    });
 
-  console.log('Database seeded successfully!');
+    const reservations = await Promise.all(
+      Array.from({ length: 5 }).map(() =>
+        prisma.reservation.create({
+          data: {
+            userId: user.id,
+            seatCount: faker.number.int({ min: 1, max: 4 }),
+            statusId: faker.helpers.arrayElement(reservationStatuses).id,
+            flightId: faker.helpers.arrayElement(flights).id,
+          },
+        })
+      )
+    );
+
+    console.log('\nUser id:', user.id);
+    console.log('User email:', user.email);
+    console.log('User password:', 'randompassword');
+
+    console.log('\nTemporary access_token:', await createAccessToken(user));
+  }
+
+  console.log('\nDatabase seeded successfully!');
 }
 
 main()
