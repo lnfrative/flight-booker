@@ -587,7 +587,7 @@
 	"variable": [
 		{
 			"key": "BASE_URL",
-			"value": "http://localhost:3000",
+			"value": "http://localhost:4010",
 			"type": "any"
 		}
 	]
