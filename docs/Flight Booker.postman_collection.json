@@ -1,0 +1,594 @@
+{
+	"info": {
+		"_postman_id": "0b7336c1-6fd2-461b-ada3-4f3eaadd7c5f",
+		"name": "Flight Booker",
+		"description": "La presente documentación explica los endpoints existente para el sistema de consulta de vuelos, creación y consulta de reservas, eliminación, autenticación y creación de nuevos usuarios.\n\n**Ningún valor de ejemplo debe tomarse como valor de prueba a menos que se especifique lo contrario.**",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11718544"
+	},
+	"item": [
+		{
+			"name": "Consultar reservas de usuario",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/usuarios/:usuarioId/reservas",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"usuarios",
+						":usuarioId",
+						"reservas"
+					],
+					"variable": [
+						{
+							"key": "usuarioId",
+							"value": "<string>",
+							"description": "(obligatorio): El identificador único del usuario del cual se desean obtener las reservas.  Este parámetro debe ser incluido en la URL de la solicitud."
+						}
+					]
+				},
+				"description": "Este endpoint recupera todas las reservas asociadas a un usuario específico, identificado por su `usuarioId`. La respuesta proporciona una lista detallada de estas reservas, incluyendo información sobre el estado de cada reserva."
+			},
+			"response": [
+				{
+					"name": "successfully / 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.1"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJuYW1lIjoiam9obmRvZSIsImlhdCI6MTc0MzMxMjAzMiwiZXhwIjoxNzQzMzE1NjMyLCJzdWIiOiJjbTh2MmI0dnowMDBhMmNvZzk5bmp0YTN1In0.-eZpLYPOoPojSm59cf_ZtrWgkbSjdyOYdYsOqgajoBA"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/api/usuarios/cm8v2b4vz000a2cog99njta3u/reservas",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"api",
+								"usuarios",
+								"cm8v2b4vz000a2cog99njta3u",
+								"reservas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Mar 2025 06:07:54 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"id\": \"cm8v2b56c000i2cogg87o9yq8\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 2,\n  \"createdAt\": \"2025-03-30T03:09:59.413Z\",\n  \"statusId\": 3,\n  \"flightId\": \"cm8v2b4jx00092cogtpglyg91\",\n  \"status\": {\n   \"id\": 3,\n   \"name\": \"Confirmado\"\n  }\n },\n {\n  \"id\": \"cm8v2b56c000d2cogg8n0tbyo\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 4,\n  \"createdAt\": \"2025-03-30T03:09:59.412Z\",\n  \"statusId\": 3,\n  \"flightId\": \"cm8v2b4jx00092cogtpglyg91\",\n  \"status\": {\n   \"id\": 3,\n   \"name\": \"Confirmado\"\n  }\n },\n {\n  \"id\": \"cm8v2b56d000k2cog2erpnux2\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 2,\n  \"createdAt\": \"2025-03-30T03:09:59.413Z\",\n  \"statusId\": 1,\n  \"flightId\": \"cm8v2b4jx00052cogd5cpq70i\",\n  \"status\": {\n   \"id\": 1,\n   \"name\": \"Cancelado\"\n  }\n },\n {\n  \"id\": \"cm8v2b56c000g2cogaedo8ipn\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 1,\n  \"createdAt\": \"2025-03-30T03:09:59.413Z\",\n  \"statusId\": 1,\n  \"flightId\": \"cm8v2b4jx00052cogd5cpq70i\",\n  \"status\": {\n   \"id\": 1,\n   \"name\": \"Cancelado\"\n  }\n },\n {\n  \"id\": \"cm8v2b56c000e2cog9j8br1xu\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 1,\n  \"createdAt\": \"2025-03-30T03:09:59.412Z\",\n  \"statusId\": 3,\n  \"flightId\": \"cm8v2b4jx00052cogd5cpq70i\",\n  \"status\": {\n   \"id\": 3,\n   \"name\": \"Confirmado\"\n  }\n },\n {\n  \"id\": \"cm8v2davl00012cp3k5lggb7p\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 1,\n  \"createdAt\": \"2025-03-30T03:11:38.824Z\",\n  \"statusId\": 1,\n  \"flightId\": \"cm8v2b4jx00092cogtpglyg91\",\n  \"status\": {\n   \"id\": 1,\n   \"name\": \"Cancelado\"\n  }\n },\n {\n  \"id\": \"cm8v2kr3l00032cp3ut1cmrch\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 1,\n  \"createdAt\": \"2025-03-30T03:17:27.729Z\",\n  \"statusId\": 1,\n  \"flightId\": \"cm8v2b4jx00092cogtpglyg91\",\n  \"status\": {\n   \"id\": 1,\n   \"name\": \"Cancelado\"\n  }\n },\n {\n  \"id\": \"cm8v40l4k000m2c06wy9sy674\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 1,\n  \"createdAt\": \"2025-03-30T03:57:46.101Z\",\n  \"statusId\": 1,\n  \"flightId\": \"cm8v2b4jx00082cogaapgfcjj\",\n  \"status\": {\n   \"id\": 1,\n   \"name\": \"Cancelado\"\n  }\n },\n {\n  \"id\": \"cm8v41zic000o2c0655l15nda\",\n  \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n  \"seatCount\": 1,\n  \"createdAt\": \"2025-03-30T03:58:51.396Z\",\n  \"statusId\": 1,\n  \"flightId\": \"cm8v2b4jx00082cogaapgfcjj\",\n  \"status\": {\n   \"id\": 1,\n   \"name\": \"Cancelado\"\n  }\n }\n]"
+				}
+			]
+		},
+		{
+			"name": "Cancelar reserva",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "<access_token>",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/reservas/:id",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"reservas",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "<string>",
+							"description": "(obligatorio): El identificador único de la reserva que se desea cancelar. Este parámetro debe ser incluido en la URL de la solicitud."
+						}
+					]
+				},
+				"description": "Este endpoint permite la cancelación de una reserva existente. La cancelación se realiza identificando la reserva de forma única a través del parámetro `id` en la URL. Además, requiere autenticación mediante un JWT válido en la cabecera de la solicitud para asegurar que solo el usuario que realizó la reserva pueda cancelarla."
+			},
+			"response": [
+				{
+					"name": "no-content / 204",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.1"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJuYW1lIjoiam9obmRvZSIsImlhdCI6MTc0MzMxMjAzMiwiZXhwIjoxNzQzMzE1NjMyLCJzdWIiOiJjbTh2MmI0dnowMDBhMmNvZzk5bmp0YTN1In0.-eZpLYPOoPojSm59cf_ZtrWgkbSjdyOYdYsOqgajoBA"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/api/reservas/cm8v2b56c000d2cogg8n0tbyo",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"api",
+								"reservas",
+								"cm8v2b56c000d2cogg8n0tbyo"
+							]
+						}
+					},
+					"status": "No Content",
+					"code": 204,
+					"_postman_previewlanguage": "Text",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Mar 2025 06:07:40 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Generar credenciales",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"johndoe@example.com\",\n    \"password\": \"randompassword\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/auth/login",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				},
+				"description": "Este endpoint permite a los usuarios autenticarse en el sistema. Se proporcionan las credenciales (correo electrónico y contraseña) en el cuerpo de la solicitud. El servidor verifica las credenciales y, si son válidas, devuelve un token de acceso (access token) que se utilizará para autorizar el acceso a otros recursos protegidos de la API.\n\n**Cuerpo de la Solicitud (Request Body):**\n\nEl cuerpo de la solicitud debe ser un objeto JSON con los siguientes campos:\n\n- `email` (obligatorio): La dirección de correo electrónico del usuario.\n    \n- `password` (obligatorio): La contraseña del usuario."
+			},
+			"response": [
+				{
+					"name": "successfully / 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.1"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/api/auth/login",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Mar 2025 05:20:32 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJuYW1lIjoiam9obmRvZSIsImlhdCI6MTc0MzMxMjAzMiwiZXhwIjoxNzQzMzE1NjMyLCJzdWIiOiJjbTh2MmI0dnowMDBhMmNvZzk5bmp0YTN1In0.-eZpLYPOoPojSm59cf_ZtrWgkbSjdyOYdYsOqgajoBA\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Crear reserva",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "<access_token>",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"flightId\": \"<string>\",\n  \"seatCount\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/reservas",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"reservas"
+					]
+				},
+				"description": "Este endpoint permite a los usuarios crear una nueva reserva para un vuelo. Requiere autenticación mediante un JWT válido en la cabecera de la solicitud. El usuario debe proporcionar el `flightId` en el cuerpo de la solicitud para especificar qué vuelo desea reservar. Opcionalmente, se puede especificar la cantidad de asientos a reservar (`seatCount`). El sistema verifica la disponibilidad del vuelo antes de crear la reserva.\n\n**Cuerpo de la Solicitud (Request Body):**\n\nEl cuerpo de la solicitud debe ser un objeto JSON con los siguientes campos:\n\n- `flightId` (obligatorio): El identificador único del vuelo que se desea reservar.\n    \n- `seatCount` (opcional): La cantidad de asientos que se desean reservar. Si no se proporciona, el valor por defecto es 1."
+			},
+			"response": [
+				{
+					"name": "successfully / 200",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.1"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG5kb2VAZXhhbXBsZS5jb20iLCJuYW1lIjoiam9obmRvZSIsImlhdCI6MTc0MzMxMjAzMiwiZXhwIjoxNzQzMzE1NjMyLCJzdWIiOiJjbTh2MmI0dnowMDBhMmNvZzk5bmp0YTN1In0.-eZpLYPOoPojSm59cf_ZtrWgkbSjdyOYdYsOqgajoBA"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/api/reservas",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"api",
+								"reservas"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Mar 2025 03:58:51 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n \"id\": \"cm8v41zic000o2c0655l15nda\",\n \"userId\": \"cm8v2b4vz000a2cog99njta3u\",\n \"seatCount\": 1,\n \"createdAt\": \"2025-03-30T03:58:51.396Z\",\n \"statusId\": 1,\n \"flightId\": \"cm8v2b4jx00082cogaapgfcjj\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Consultar vuelos",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/api/vuelos?origin=&destination=&departure&offset",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"vuelos"
+					],
+					"query": [
+						{
+							"key": "origin",
+							"value": "",
+							"description": "(opcional): Código IATA del aeropuerto de origen."
+						},
+						{
+							"key": "destination",
+							"value": "",
+							"description": "(opcional): Código IATA del aeropuerto de destino."
+						},
+						{
+							"key": "departure",
+							"value": null,
+							"description": "(opcional): Fecha de salida del vuelo (en formato ISO 8601, por ejemplo, 2024-07-28)."
+						},
+						{
+							"key": "offset",
+							"value": null,
+							"description": "(opcional): Número de resultados a omitir (para la paginación). Por defecto es 0."
+						}
+					]
+				},
+				"description": "Este endpoint recupera una lista de vuelos que coinciden con los criterios de búsqueda proporcionados en los parámetros de la URL. Permite filtrar los vuelos por origen, destino y fecha de salida. La respuesta está paginada, permitiendo la recuperación de resultados en lotes."
+			},
+			"response": [
+				{
+					"name": "successfully / 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "User-Agent",
+								"value": "insomnia/11.0.1"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/api/vuelos",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"api",
+								"vuelos"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Mar 2025 05:58:56 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "[\n {\n  \"id\": \"cm8v2b4jx00092cogtpglyg91\",\n  \"availableCapacity\": 169,\n  \"departure\": \"2025-03-30T08:56:02.873Z\",\n  \"originId\": 3,\n  \"destinationId\": 9,\n  \"airplaneId\": 9,\n  \"origin\": {\n   \"id\": 3,\n   \"name\": \"Los Angeles International Airport\",\n   \"iataCode\": \"LAX\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 9,\n   \"name\": \"Beijing Capital International Airport\",\n   \"iataCode\": \"PEK\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v2b4jx00042cog52iwjfgi\",\n  \"availableCapacity\": 226,\n  \"departure\": \"2025-03-30T11:07:54.753Z\",\n  \"originId\": 6,\n  \"destinationId\": 5,\n  \"airplaneId\": 8,\n  \"origin\": {\n   \"id\": 6,\n   \"name\": \"Recife Guararapes-Gilberto Freyre International Airport\",\n   \"iataCode\": \"REC\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 5,\n   \"name\": \"Hong Kong International Airport\",\n   \"iataCode\": \"HKG\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v3e9w700072c06jdmdoqe6\",\n  \"availableCapacity\": 139,\n  \"departure\": \"2025-03-30T12:01:35.424Z\",\n  \"originId\": 19,\n  \"destinationId\": 15,\n  \"airplaneId\": 19,\n  \"origin\": {\n   \"id\": 19,\n   \"name\": \"King Abdulaziz International Airport\",\n   \"iataCode\": \"JED\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 15,\n   \"name\": \"Canberra Airport\",\n   \"iataCode\": \"CBR\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v3e9w700042c065braao3b\",\n  \"availableCapacity\": 206,\n  \"departure\": \"2025-03-30T14:45:58.017Z\",\n  \"originId\": 18,\n  \"destinationId\": 15,\n  \"airplaneId\": 12,\n  \"origin\": {\n   \"id\": 18,\n   \"name\": \"Orlando International Airport\",\n   \"iataCode\": \"MCO\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 15,\n   \"name\": \"Canberra Airport\",\n   \"iataCode\": \"CBR\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v3e9w700062c06kf85ua08\",\n  \"availableCapacity\": 83,\n  \"departure\": \"2025-03-30T16:31:31.257Z\",\n  \"originId\": 16,\n  \"destinationId\": 12,\n  \"airplaneId\": 13,\n  \"origin\": {\n   \"id\": 16,\n   \"name\": \"Zurich Airport\",\n   \"iataCode\": \"ZRH\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 12,\n   \"name\": \"Noumea Magenta Airport\",\n   \"iataCode\": \"GEA\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v2b4jx00062cog2ff93ptd\",\n  \"availableCapacity\": 229,\n  \"departure\": \"2025-03-30T17:49:42.218Z\",\n  \"originId\": 6,\n  \"destinationId\": 1,\n  \"airplaneId\": 3,\n  \"origin\": {\n   \"id\": 6,\n   \"name\": \"Recife Guararapes-Gilberto Freyre International Airport\",\n   \"iataCode\": \"REC\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 1,\n   \"name\": \"Shenzhen Bao'an International Airport\",\n   \"iataCode\": \"SZX\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v2b4jx00082cogaapgfcjj\",\n  \"availableCapacity\": 89,\n  \"departure\": \"2025-03-30T20:07:32.262Z\",\n  \"originId\": 9,\n  \"destinationId\": 10,\n  \"airplaneId\": 2,\n  \"origin\": {\n   \"id\": 9,\n   \"name\": \"Beijing Capital International Airport\",\n   \"iataCode\": \"PEK\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 10,\n   \"name\": \"Istanbul Airport\",\n   \"iataCode\": \"IST\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v2b4jx00052cogd5cpq70i\",\n  \"availableCapacity\": 140,\n  \"departure\": \"2025-03-30T20:35:28.058Z\",\n  \"originId\": 2,\n  \"destinationId\": 8,\n  \"airplaneId\": 10,\n  \"origin\": {\n   \"id\": 2,\n   \"name\": \"Kahului Airport\",\n   \"iataCode\": \"OGG\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 8,\n   \"name\": \"Brussels Airport\",\n   \"iataCode\": \"BRU\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v3e9w700092c06yass76ho\",\n  \"availableCapacity\": 160,\n  \"departure\": \"2025-03-30T21:06:15.186Z\",\n  \"originId\": 11,\n  \"destinationId\": 18,\n  \"airplaneId\": 13,\n  \"origin\": {\n   \"id\": 11,\n   \"name\": \"Faa'a International Airport\",\n   \"iataCode\": \"PPT\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 18,\n   \"name\": \"Orlando International Airport\",\n   \"iataCode\": \"MCO\",\n   \"icaoCode\": null\n  }\n },\n {\n  \"id\": \"cm8v3e9w700052c06n4mhnne1\",\n  \"availableCapacity\": 142,\n  \"departure\": \"2025-03-30T21:42:50.779Z\",\n  \"originId\": 19,\n  \"destinationId\": 20,\n  \"airplaneId\": 20,\n  \"origin\": {\n   \"id\": 19,\n   \"name\": \"King Abdulaziz International Airport\",\n   \"iataCode\": \"JED\",\n   \"icaoCode\": null\n  },\n  \"destination\": {\n   \"id\": 20,\n   \"name\": \"Vnukovo International Airport\",\n   \"iataCode\": \"VKO\",\n   \"icaoCode\": null\n  }\n }\n]"
+				}
+			]
+		},
+		{
+			"name": "Crear usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"usuario@ejemplo.com\",\n  \"password\": \"contraseña123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/api/usuarios",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"api",
+						"usuarios"
+					]
+				},
+				"description": "Este endpoint permite a los usuarios registrarse en el sistema. Los usuarios proporcionan su correo electrónico y contraseña en el cuerpo de la solicitud. El servidor crea un nuevo usuario en la base de datos (hasheando la contraseña por seguridad) y luego genera un token de acceso JWT para el nuevo usuario."
+			},
+			"response": [
+				{
+					"name": " / 409",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "User-Agent",
+								"value": "insomnia/10.0.0"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRkZUBkZS5jb20iLCJuYW1lIjpudWxsLCJpYXQiOjE3NDMyNTg1NjksImV4cCI6MTc0MzI1OTE2OSwic3ViIjoiY204dTU4eG9vMDAwMDJjd3dnOXdzcTl0cyJ9.JcTPctywWIbk1xt4LfGZUNAOAFGGr9JodJvRqDYa3uI"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL1}}/api/usuarios",
+							"host": [
+								"{{baseURL1}}"
+							],
+							"path": [
+								"api",
+								"usuarios"
+							]
+						}
+					},
+					"status": "Conflict",
+					"code": 409,
+					"_postman_previewlanguage": "Text",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Router-Segment-Prefetch"
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 30 Mar 2025 02:33:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000",
+			"type": "any"
+		}
+	]
+}
