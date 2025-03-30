@@ -78,7 +78,7 @@ model Airport {
   id        Int     @id @default(autoincrement())
   name      String
   iataCode String @map("iata_code") @unique
-  icaoCode String @map("icao_code") 
+  icaoCode String? @map("icao_code") 
 
   flightsOrigin Flight[] @relation("Origin")
   flightsDestination Flight[] @relation("Destination")
