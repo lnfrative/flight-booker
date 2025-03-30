@@ -8,10 +8,14 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@faker-js/faker": "^9.6.0",
     "@mui/material": "^7.0.1",
     "@mui/material-nextjs": "^7.0.0",
     "@prisma/client": "^6.5.0",
@@ -25,12 +29,13 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^20",
+    "@types/node": "^22.13.14",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
     "prisma": "^6.5.0",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.2"
   }
 }
