@@ -1,24 +1,29 @@
 import { faker } from '@faker-js/faker';
 import { prisma } from '../db';
+import { hash } from 'argon2';
+
+const AIRPLANE_SIZE = 10;
+const AIRPORT_SIZE = 10;
 
 async function main() {
   const reservationStatuses = await Promise.all([
     prisma.reservationStatus.create({
-      data: { name: 'Reservado' },
+      data: { name: 'RESERVADO' },
     }),
     prisma.reservationStatus.create({
-      data: { name: 'Confirmado' },
+      data: { name: 'CONFIRMADO' },
     }),
     prisma.reservationStatus.create({
-      data: { name: 'Cancelado' },
+      data: { name: 'CANCELADO' },
     }),
   ]);
 
+  const airplaneModels = generateUniqueAirplaneModels();
   const airplanes = await Promise.all(
-    Array.from({ length: 10 }).map(() =>
+    Array.from({ length: AIRPLANE_SIZE }).map((value, idx) =>
       prisma.airplane.create({
         data: {
-          model: faker.airline.airplane().name,
+          model: airplaneModels[idx],
           capacity: faker.number.int({ min: 100, max: 300 }),
           stock: faker.number.int({ min: 1, max: 10 }),
         },
@@ -26,14 +31,14 @@ async function main() {
     )
   );
 
+  const airportsData = generateUniqueAirports();
   const airports = await Promise.all(
-    Array.from({ length: 10 }).map(() => {
-      const airport = faker.airline.airport();
+    Array.from({ length: AIRPORT_SIZE }).map((value, idx) => {
+      const airport = airportsData[idx];
       return prisma.airport.create({
         data: {
           name: airport.name,
           iataCode: airport.iataCode,
-          icaoCode: '',
         },
       })
     })
@@ -62,7 +67,7 @@ async function main() {
     data: {
       name: 'johndoe',
       email: 'johndoe@example.com',
-      password: 'randompassword',
+      password: await hash('randompassword'),
     },
   });
 
@@ -89,3 +94,29 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+  const generateUniqueAirplaneModels = () => {
+    const uniqueAirplanes = new Set<string>();
+    
+    while (uniqueAirplanes.size < AIRPLANE_SIZE) {
+      uniqueAirplanes.add(faker.airline.airplane().name);
+    }
+  
+    return Array.from(uniqueAirplanes);
+  }
+
+  const generateUniqueAirports = () => {
+    const uniqueAirports = new Set<string>();  
+    const airports = []; 
+    
+    while (airports.length < AIRPORT_SIZE) {
+      const airport = faker.airline.airport();
+      
+      if (!uniqueAirports.has(airport.iataCode)) {
+        uniqueAirports.add(airport.iataCode);
+        airports.push(airport);
+      }
+    }
+  
+    return airports;
+  }
