@@ -37,7 +37,7 @@ POPULATE_DB=YES docker-compose up
 
 La salida mostará detalles con los datos de prueba.
 
-Para posteriores ejecuciones, es suficiente ejecutar:
+Para posteriores ejecuciones es suficiente:
 
 ```bash
 docker-compose up
@@ -53,4 +53,10 @@ docker-compose up -d
 
 La documentación del API se especifica [`Flight_Booker.postman_collection.json`](./docs/Flight_Booker.postman_collection.json).
 
-Consideraciones: La variable de entorno BASE_URL en la documentación se debe actualizar si se modifica la variable APP_PORT al levantar los contenedores.
+> Ningún valor de ejemplo debe usarse como valor de prueba a menos que se especifique lo contrario.
+
+## Consideraciones
+
+APP_PORT escucha por defecto el puerto 4010, para usar un puerto diferente se debe especificar la variable de entorno al momento de ejecutar [`generate_config.sh`](./generate_config.sh). Lo mismo aplica para las demás variables.
+
+La variable de entorno BASE_URL en la documentación se debe actualizar si se modifica la variable APP_PORT.

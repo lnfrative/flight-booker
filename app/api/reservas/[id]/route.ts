@@ -2,7 +2,15 @@ import { validateAuthorization } from "@/auth";
 import { RESERVATION_CANCELLED_STATUS_ID } from "@/constants";
 import { prisma } from "@/db";
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+type Params = Promise<{ id: string }>;
+
+export async function DELETE(request: Request, segmentData: { params: Params }) {
+  const { id } = await segmentData.params;
+
+  if (!id) {
+    return new Response(null, { status: 400, statusText: "Bad Request" });
+  }
+
   const decodedAccessToken = await validateAuthorization(request.headers);
 
   if (!decodedAccessToken || !decodedAccessToken.sub) {
@@ -11,7 +19,7 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
 
   try {
     await prisma.reservation.update({
-      where: { id: params.id, userId: decodedAccessToken.sub },
+      where: { id: id, userId: decodedAccessToken.sub },
       data: {
         statusId: RESERVATION_CANCELLED_STATUS_ID
       },

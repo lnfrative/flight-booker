@@ -1,15 +1,18 @@
 import { prisma } from "@/db";
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, { params }: { params: { usuarioId: string } }) {
+type Params = Promise<{ usuarioId: string }>;
+
+export async function GET(request: NextRequest, segmentData: { params: Params }) {
+  const { usuarioId } = await segmentData.params;
   
-  if (!params.usuarioId) {
+  if (!usuarioId) {
     return new Response(null, { status: 400, statusText: "Bad Request" });
   }
 
   const reservations = await prisma.reservation.findMany({
     where: {
-      userId: params.usuarioId,
+      userId: usuarioId,
     },
     include: {
       status: true,
