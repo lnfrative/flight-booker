@@ -9,6 +9,8 @@ Ejemplo básico de aplicación para reserva y consulta de vuelos con integració
 
 ## Instrucciones
 
+Importante, esta guía asegura el funcionamiento para un entorno de desarrollo. Para producción se deben hacer los cambios pertinentes en el [`docker-compose.yml`](./docker-compose.yml).
+
 ### 1. Clona el repositorio
 
 Clona el repositorio en tu máquina local:
@@ -49,7 +51,7 @@ O si se desea mantener los servicios en segundo plano:
 docker-compose up -d
 ```
 
-## Documentación
+## Documentación del API
 
 La documentación del API se especifica [`Flight_Booker.postman_collection.json`](./docs/Flight_Booker.postman_collection.json).
 
