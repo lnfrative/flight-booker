@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 import { prisma } from '../db';
 import { hash } from 'argon2';
 import { createAccessToken } from '../auth';
+import { RESERVATION_CANCELLED_STATUS_ID, RESERVATION_CONFIRMED_STATUS_ID, RESERVATION_CREATED_STATUS_ID } from '../constants';
 
 const AIRPLANE_SIZE = 10;
 const AIRPORT_SIZE = 10;
@@ -12,13 +13,13 @@ async function main() {
   console.log('\nCreating reservation statuses...');
   const reservationStatuses = await Promise.all([
     prisma.reservationStatus.create({
-      data: { name: 'RESERVADO' },
+      data: { name: 'RESERVADO', id: RESERVATION_CREATED_STATUS_ID },
     }),
     prisma.reservationStatus.create({
-      data: { name: 'CONFIRMADO' },
+      data: { name: 'CONFIRMADO', id: RESERVATION_CONFIRMED_STATUS_ID },
     }),
     prisma.reservationStatus.create({
-      data: { name: 'CANCELADO' },
+      data: { name: 'CANCELADO', id: RESERVATION_CANCELLED_STATUS_ID },
     }),
   ]);
 

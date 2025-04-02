@@ -16,7 +16,7 @@ Importante, esta guía asegura el funcionamiento para un entorno de desarrollo. 
 Clona el repositorio en tu máquina local:
 
 ```bash
-git clone hhttps://github.com/lnfrative/flight-booker.git
+git clone https://github.com/lnfrative/flight-booker.git
 cd flight-booker
 ```
 
